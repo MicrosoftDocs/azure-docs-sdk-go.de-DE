@@ -8,11 +8,11 @@ ms.date: 02/08/2018
 ms.topic: quickstart
 ms.devlang: go
 manager: routlaw
-ms.openlocfilehash: e530d944deca40e9e6c29b6c2768e2367822714e
-ms.sourcegitcommit: aaa8c37880332625f858a38f5918e6cf581bf48d
+ms.openlocfilehash: ae460dbf21b13c40f3d564274f8b790afe005aae
+ms.sourcegitcommit: af3473779cd7c2978f290fbdc51ee15eb1130840
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/15/2018
+ms.lasthandoff: 03/15/2018
 ---
 # <a name="quickstart-deploy-an-azure-virtual-machine-from-a-template-with-the-azure-sdk-for-go"></a>Schnellstart: Bereitstellen eines virtuellen Azure-Computers über eine Vorlage mit dem Azure SDK für Go
 
@@ -32,7 +32,7 @@ Falls Sie eine lokale Installation der Azure CLI verwenden, ist für diesen Schn
 
 ## <a name="create-a-service-principal"></a>Erstellen eines Dienstprinzipals
 
-Wenn Sie sich nicht interaktiv mit einer Anwendung anmelden möchten, benötigen Sie einen Dienstprinzipal. Dienstprinzipale sind Teil der rollenbasierten Authentifizierung (RBAC), bei der eine eindeutige Benutzeridentität erstellt wird. Führen Sie den folgenden Befehl aus, um mit der CLI einen neuen Dienstprinzipal zu erstellen:
+Wenn Sie sich nicht interaktiv mit einer Anwendung anmelden möchten, benötigen Sie einen Dienstprinzipal. Dienstprinzipale sind Teil der rollenbasierten Zugriffssteuerung (RBAC), bei der eine eindeutige Benutzeridentität erstellt wird. Führen Sie den folgenden Befehl aus, um mit der CLI einen neuen Dienstprinzipal zu erstellen:
 
 ```azurecli-interactive
 az ad sp create-for-rbac --name az-go-vm-quickstart
@@ -79,7 +79,7 @@ Außerdem müssen Sie einen Wert in der Datei `vm-quickstart-params.json` bearbe
     }
 ```
 
-* `vm_password`: Das Kennwort für das VM-Benutzerkonto. Es muss eine Länge von 6 bis 72 Zeichen haben und mindestens drei verschiedene Arten der folgenden Zeichen enthalten:
+* `vm_password`: Das Kennwort für das VM-Benutzerkonto. Es muss eine Länge von 12 bis 72 Zeichen haben und mindestens drei verschiedene Arten der folgenden Zeichen enthalten:
   * Kleinbuchstabe
   * Großbuchstabe
   * Ziffer
