@@ -3,19 +3,19 @@ title: Installieren des Azure SDK für Go
 description: Es wird beschrieben, wie Sie das Azure SDK für Go installieren und konfigurieren und das Vendoring dafür durchführen.
 author: sptramer
 ms.author: sttramer
-ms.date: 01/30/2018
+ms.date: 03/14/2018
 ms.topic: article
 ms.devlang: go
 manager: carmonm
-ms.openlocfilehash: 580daf4f2e91eabf97e3acd21bda183c559b57da
-ms.sourcegitcommit: fcc1786d59d2e32c97a9a8e0748e06f564a961bd
+ms.openlocfilehash: a6a92e080aea1a92f47a9d7083f133ca05a47541
+ms.sourcegitcommit: 26520a8c6e812facb5b9432d68c370fa23c99888
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/23/2018
+ms.lasthandoff: 04/16/2018
 ---
-# <a name="installing-the-azure-sdk-for-go"></a>Installieren des Azure SDK für Go
+# <a name="install-the-azure-sdk-for-go"></a>Installieren des Azure SDK für Go
 
-Willkommen beim Azure SDK für Go! Dieses SDK ermöglicht Ihnen das Verwalten und Interagieren mit Azure-Diensten über Ihre Go-Anwendungen.
+Willkommen beim Azure SDK für Go! Mit diesem SDK können Sie Azure-Dienste über Ihre Go-Anwendungen verwalten und mit ihnen interagieren.
 
 ## <a name="get-the-azure-sdk-for-go"></a>Abrufen des Azure SDK für Go
 
@@ -27,7 +27,7 @@ Für die Arbeit mit Azure Storage Blobs ist ein separates SDK erforderlich.
 go get -u -d github.com/Azure/azure-storage-blob-go/...
 ```
 
-## <a name="vendoring-the-azure-sdk-for-go"></a>Durchführen des Vendoring für das Azure SDK für Go
+## <a name="vendor-the-azure-sdk-for-go"></a>Durchführen des Vendorings für das Azure SDK für Go
 
 Das Vendoring für das Azure SDK für Go kann mit [dep](https://github.com/golang/dep) durchgeführt werden. Das Vendoring wird aus Stabilitätsgründen empfohlen. Fügen Sie `github.com/Azure/azure-sdk-for-go` einem `[[constraint]]`-Abschnitt der Datei `Gopkg.toml` hinzu, um die Unterstützung für `dep` zu verwenden. Fügen Sie beispielsweise den folgenden Eintrag hinzu, um das Vendoring für Version `14.0.0` durchzuführen:
 
@@ -37,12 +37,12 @@ name = "github.com/Azure/azure-sdk-for-go"
 version = "14.0.0"
 ```
 
-## <a name="including-the-azure-sdk-for-go-in-your-project"></a>Einbinden des Azure SDK für Go in Ihr Projekt
+## <a name="include-the-azure-sdk-for-go-in-your-project"></a>Integrieren des Azure SDK für Go in Ihr Projekt
 
 Importieren Sie beliebige Dienste, mit denen Sie interagieren, und die erforderlichen `autorest`-Module, um Azure-Dienste in Ihrem Go-Code zu nutzen.
 Sie erhalten eine vollständige Liste mit den verfügbaren Modulen von GoDoc für [verfügbare Dienste](https://godoc.org/github.com/Azure/azure-sdk-for-go) und [AutoRest-Pakete](https://godoc.org/github.com/Azure/go-autorest). Die am häufigsten verwendeten Pakete, die Sie für `go-autorest` benötigen, sind:
 
-| Paket | BESCHREIBUNG |
+| Paket | Beschreibung |
 |---------|-------------|
 | [github.com/Azure/go-autorest/autorest][autorest] | Objekte zur Verarbeitung der Dienstclientauthentifizierung |
 | [github.com/Azure/go-autorest/autorest/azure][autorest/azure] | Konstanten für Interaktionen mit Azure-Diensten |
