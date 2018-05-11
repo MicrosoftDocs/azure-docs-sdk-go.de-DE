@@ -4,16 +4,19 @@ description: Hier erfahren Sie, welche Authentifizierungsmethoden im Azure SDK f
 services: azure
 author: sptramer
 ms.author: sttramer
-ms.date: 04/03/2018
-ms.topic: article
-ms.service: azure
-ms.devlang: go
 manager: carmonm
-ms.openlocfilehash: 39f9dc5a7cdf9ab84cfd9264446bacb31392ca80
-ms.sourcegitcommit: 59d2b4c9d8da15fbbd15e36551093219fdaf256e
+ms.date: 04/03/2018
+ms.topic: conceptual
+ms.prod: azure
+ms.technology: azure-sdk-go
+ms.devlang: go
+ms.service: active-directory
+ms.component: authentication
+ms.openlocfilehash: 370f5607b89c0044022f7987d06c3a55c9d6f352
+ms.sourcegitcommit: f08abf902b48f8173aa6e261084ff2cfc9043305
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/18/2018
+ms.lasthandoff: 05/03/2018
 ---
 # <a name="authentication-methods-in-the-azure-sdk-for-go"></a>Authentifizierungsmethoden im Azure SDK für Go
 
@@ -26,7 +29,7 @@ Das Azure SDK für Go bietet verschiedene Authentifizierungsarten mit unterschie
 | Authentifizierungsart | Verwendungsempfehlung |
 |---------------------|---------------------|
 | Zertifikatbasierte Authentifizierung | Sie verfügen über ein X.509-Zertifikat, das für einen AAD-Benutzer oder -Dienstprinzipal (Azure Active Directory) konfiguriert wurde. Weitere Informationen finden Sie unter [Erste Schritte mit zertifikatbasierter Authentifizierung in Azure Active Directory]. |
-| Clientanmeldeinformationen | Sie verfügen über einen konfigurierten Dienstprinzipal, der für diese Anwendung oder für eine Klasse von Anwendungen konfiguriert ist, der sie angehört. Weitere Informationen finden Sie unter [Erstellen eines Azure-Dienstprinzipals mit Azure CLI 2.0]. |
+| Client credentials (Clientanmeldeinformationen) | Sie verfügen über einen konfigurierten Dienstprinzipal, der für diese Anwendung oder für eine Klasse von Anwendungen konfiguriert ist, der sie angehört. Weitere Informationen finden Sie unter [Erstellen eines Azure-Dienstprinzipals mit Azure CLI 2.0]. |
 | Verwaltete Dienstidentität (Managed Service Identity, MSI) | Ihre Anwendung wird auf einer Azure-Ressource ausgeführt, die mit MSI (Managed Service Identity) konfiguriert wurde. Weitere Informationen finden Sie unter [Verwaltete Dienstidentität (Managed Service Identity, MSI) für Azure-Ressourcen]. |
 | Gerätetoken | Für die Anwendung ist __ausschließlich__ eine interaktive Verwendung vorgesehen, und sie wird von verschiedenen Benutzern (ggf. aus verschiedenen AAD-Mandanten) verwendet. Benutzer können sich über einen Webbrowser anmelden. Weitere Informationen finden Sie unter [Verwenden der Gerätetokenauthentifizierung](#use-device-token-authentication).|
 | Benutzername/Kennwort | Sie verfügen über eine interaktive Anwendung, die keine andere Authentifizierungsmethode verwenden kann. Für Ihre Benutzer ist die mehrstufige Authentifizierung für die AAD-Anmeldung nicht aktiviert. |
@@ -56,12 +59,12 @@ Die umgebungsbasierte Authentifizierung unterstützt alle Authentifizierungsmeth
 
 Die folgende Tabelle gibt Aufschluss über die Umgebungsvariablen, die für die einzelnen Authentifizierungsarten festgelegt werden müssen, die von der umgebungsbasierten Authentifizierung unterstützt werden.
 
-| Authentifizierungsart | Umgebungsvariable | Beschreibung |
+| Authentifizierungsart | Umgebungsvariable | BESCHREIBUNG |
 | ------------------- | -------------------- | ----------- |
 | __Clientanmeldeinformationen__ | `AZURE_TENANT_ID` | Die ID für den Active Directory-Mandanten, zu dem der Dienstprinzipal gehört. |
 | | `AZURE_CLIENT_ID` | Der Name oder die ID des Dienstprinzipals. |
 | | `AZURE_CLIENT_SECRET` | Das dem Dienstprinzipal zugeordnete Geheimnis |
-| __Zertifikat__ | `AZURE_TENANT_ID` | Die ID für den Active Directory-Mandanten, bei dem das Zertifikat registriert ist. |
+| __Certificate__ | `AZURE_TENANT_ID` | Die ID für den Active Directory-Mandanten, bei dem das Zertifikat registriert ist. |
 | | `AZURE_CLIENT_ID` | Die dem Zertifikat zugeordnete Anwendungsclient-ID. |
 | | `AZURE_CERTIFICATE_PATH` | Der Pfad der Clientzertifikatdatei. |
 | | `AZURE_CERTIFICATE_PASSWORD` | Das Kennwort für das Clientzertifikat. |
@@ -73,7 +76,7 @@ Die folgende Tabelle gibt Aufschluss über die Umgebungsvariablen, die für die 
 
 Wenn Sie eine Verbindung mit einem Cloud- oder Verwaltungsendpunkt herstellen müssen, bei dem es sich nicht um die standardmäßige öffentliche Azure-Cloud handelt, können Sie auch die folgenden Umgebungsvariablen festlegen. Diese werden häufig bei Verwendung von Azure Stack, bei Verwendung einer Cloud in einer anderen geografischen Region oder bei Verwendung des klassischen Azure-Bereitstellungsmodells festgelegt.
 
-| Umgebungsvariable | Beschreibung  |
+| Umgebungsvariable | BESCHREIBUNG  |
 |----------------------|--------------|
 | `AZURE_ENVIRONMENT` | Der Name der Cloudumgebung, mit der eine Verbindung hergestellt werden soll. |
 | `AZURE_AD_RESOURCE` | Die Active Directory-Ressourcen-ID, die beim Herstellen der Verbindung verwendet werden soll. Hierbei muss es sich um einen URI handeln, der auf Ihren Verwaltungsendpunkt verweist. |
@@ -84,6 +87,27 @@ Rufen Sie bei Verwendung der umgebungsbasierten Authentifizierung die Funktion [
 import "github.com/Azure/go-autorest/autorest/azure/auth"
 authorizer, err := auth.NewAuthorizerFromEnvironment()
 ```
+
+### <a name="authentication-on-azure-stack"></a>Authentifizierung in Azure Stack
+
+Für die Authentifizierung in Azure Stack müssen Sie die folgenden Variablen festlegen:
+
+| Umgebungsvariable | BESCHREIBUNG  |
+|----------------------|--------------|
+| `AZURE_AD_ENDPOINT` | Active Directory-Endpunkt |
+| `AZURE_AD_RESOURCE` | Active Directory-Ressourcen-ID |
+
+Diese Variablen können aus den Azure Stack-Metadateninformationen abgerufen werden. Öffnen Sie zum Abrufen der Metadaten einen Webbrowser in Ihrer Azure Stack-Umgebung, und geben Sie die folgende URL ein: `(ResourceManagerURL)/metadata/endpoints?api-version=1.0`.
+
+`ResourceManagerURL` variiert basierend auf dem Regionsnamen, dem Computernamen und dem externen vollqualifizierten Domänennamen (Fully Qualified Domain Name, FQDN) der Azure Stack-Bereitstellung:
+
+| Environment | ResourceManagerURL |
+|----------------------|--------------|
+| Development Kit | `https://management.local.azurestack.external/` |
+| Integrierte Systeme | `https://management.(region).ext-(machine-name).(FQDN)` |
+
+Weitere Informationen zur Verwendung von Azure SDK für Go in Azure Stack finden Sie unter [Verwenden von API-Versionsprofilen mit Go in Azure Stack](https://docs.microsoft.com/en-us/azure/azure-stack/user/azure-stack-version-profiles-go).
+
 
 ## <a name="use-file-based-authentication"></a>Verwenden der dateibasierten Authentifizierung
 
@@ -128,7 +152,7 @@ Die folgende Tabelle enthält die mit der Schnittstelle `AuthorizerConfig` kompa
 | Authentifizierungsart | Authorizer-Typ |
 |---------------------|-----------------------|
 | Zertifikatbasierte Authentifizierung | [ClientCertificateConfig] |
-| Clientanmeldeinformationen | [ClientCredentialsConfig] |
+| Client credentials (Clientanmeldeinformationen) | [ClientCredentialsConfig] |
 | Verwaltete Dienstidentität (Managed Service Identity, MSI) | [MSIConfig] |
 | Benutzername/Kennwort | [UsernamePasswordConfig] |
 
