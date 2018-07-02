@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.prod: azure
 ms.technology: azure-sdk-go
 ms.devlang: go
-ms.openlocfilehash: 1e122ab161766023ea146329a5edb13143699b8b
-ms.sourcegitcommit: b81b17cbb934399c195bfdcb87137aee935f5234
+ms.openlocfilehash: 25b46e3a1636c39e261ba11c6f8939d8721cc693
+ms.sourcegitcommit: 79d216c6b0442d0f3b3660ff2a34dc8b2049390c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/04/2018
-ms.locfileid: "34755531"
+ms.lasthandoff: 06/29/2018
+ms.locfileid: "37093157"
 ---
 # <a name="tools-for-developers-using-the-azure-sdk-for-go"></a>Tools für Entwickler, die das Azure SDK für Go nutzen
 
@@ -40,4 +40,4 @@ Visual Studio Code ist ein einfacher Editor, der die Go-Sprache über Erweiterun
 Da es noch keine offizielle Lösung gibt, stehen für die Verwaltung Ihrer Paketabhängigkeiten sowie das Vendoring mit Go zahlreiche Methoden zur Verfügung. Es wird empfohlen, für die Verwaltung den Abhängigkeits-Manager `dep` zu verwenden. Das Azure SDK für Go nutzt dep für das Vendoring. Bei Verwendung von dep werden Abhängigkeiten für andere Projekte garantiert korrekt abgerufen.
 
 > [!div class="nextstepaction"]
-> [Abrufen des dep-Abhängigkeit-Managers](https://github.com/tools/godep)
+> [Abrufen des dep-Abhängigkeit-Managers](https://github.com/golang/dep)
