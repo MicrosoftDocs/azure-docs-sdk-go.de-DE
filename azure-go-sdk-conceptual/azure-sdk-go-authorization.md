@@ -12,12 +12,12 @@ ms.technology: azure-sdk-go
 ms.devlang: go
 ms.service: active-directory
 ms.component: authentication
-ms.openlocfilehash: 370f5607b89c0044022f7987d06c3a55c9d6f352
-ms.sourcegitcommit: f08abf902b48f8173aa6e261084ff2cfc9043305
+ms.openlocfilehash: c7970167070bdf1f3fc75692f3e34268801c65df
+ms.sourcegitcommit: 181d4e0b164cf39b3feac346f559596bd19c94db
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/03/2018
-ms.locfileid: "32319882"
+ms.lasthandoff: 07/11/2018
+ms.locfileid: "38066998"
 ---
 # <a name="authentication-methods-in-the-azure-sdk-for-go"></a>Authentifizierungsmethoden im Azure SDK für Go
 
@@ -30,7 +30,7 @@ Das Azure SDK für Go bietet verschiedene Authentifizierungsarten mit unterschie
 | Authentifizierungsart | Verwendungsempfehlung |
 |---------------------|---------------------|
 | Zertifikatbasierte Authentifizierung | Sie verfügen über ein X.509-Zertifikat, das für einen AAD-Benutzer oder -Dienstprinzipal (Azure Active Directory) konfiguriert wurde. Weitere Informationen finden Sie unter [Erste Schritte mit zertifikatbasierter Authentifizierung in Azure Active Directory]. |
-| Client credentials (Clientanmeldeinformationen) | Sie verfügen über einen konfigurierten Dienstprinzipal, der für diese Anwendung oder für eine Klasse von Anwendungen konfiguriert ist, der sie angehört. Weitere Informationen finden Sie unter [Erstellen eines Azure-Dienstprinzipals mit Azure CLI 2.0]. |
+| Client credentials (Clientanmeldeinformationen) | Sie verfügen über einen konfigurierten Dienstprinzipal, der für diese Anwendung oder für eine Klasse von Anwendungen konfiguriert ist, der sie angehört. Weitere Informationen finden Sie unter [Erstellen eines Dienstprinzipals über die Azure CLI 2.0]. |
 | Verwaltete Dienstidentität (Managed Service Identity, MSI) | Ihre Anwendung wird auf einer Azure-Ressource ausgeführt, die mit MSI (Managed Service Identity) konfiguriert wurde. Weitere Informationen finden Sie unter [Verwaltete Dienstidentität (Managed Service Identity, MSI) für Azure-Ressourcen]. |
 | Gerätetoken | Für die Anwendung ist __ausschließlich__ eine interaktive Verwendung vorgesehen, und sie wird von verschiedenen Benutzern (ggf. aus verschiedenen AAD-Mandanten) verwendet. Benutzer können sich über einen Webbrowser anmelden. Weitere Informationen finden Sie unter [Verwenden der Gerätetokenauthentifizierung](#use-device-token-authentication).|
 | Benutzername/Kennwort | Sie verfügen über eine interaktive Anwendung, die keine andere Authentifizierungsmethode verwenden kann. Für Ihre Benutzer ist die mehrstufige Authentifizierung für die AAD-Anmeldung nicht aktiviert. |
@@ -42,7 +42,7 @@ Das Azure SDK für Go bietet verschiedene Authentifizierungsarten mit unterschie
 > Verwenden Sie die Authentifizierung mit Benutzername/Kennwort nur, wenn dies zur Erfüllung besonderer Anforderungen erforderlich ist. In Situationen, in denen eine benutzerbasierte Anmeldung geeignet ist, kann in der Regel auch die Gerätetokenauthentifizierung verwendet werden.
 
 [Erste Schritte mit zertifikatbasierter Authentifizierung in Azure Active Directory]: /azure/active-directory/active-directory-certificate-based-authentication-get-started
-[Erstellen eines Azure-Dienstprinzipals mit Azure CLI 2.0]: /cli/azure/create-an-azure-service-principal-azure-cli
+[Erstellen eines Dienstprinzipals über die Azure CLI 2.0]: /cli/azure/create-an-azure-service-principal-azure-cli
 [Verwaltete Dienstidentität (Managed Service Identity, MSI) für Azure-Ressourcen]: /azure/active-directory/managed-service-identity/overview
 
 Diese Authentifizierungsarten können mit verschiedenen Methoden verwendet werden. Bei der [_umgebungsbasierten Authentifizierung_](#use-environment-based-authentication) werden die Anmeldeinformationen direkt aus der Umgebung des Programms gelesen. Bei der [_dateibasierten Authentifizierung_](#use-file-based-authentication) wird eine Datei mit Dienstprinzipal-Anmeldeinformationen geladen. Bei der [_clientbasierten Authentifizierung_](#use-an-authentication-client) wird ein Objekt im Go-Code verwendet, und die Anmeldeinformationen müssen von Ihnen während der Programmausführung angegeben werden. Und bei der [_Gerätetokenauthentifizierung_](#use-device-token-authentication) müssen sich Benutzer interaktiv mit einem Token über einen Webbrowser anmelden. Sie kann nicht mit der umgebungs- oder dateibasierten Authentifizierung verwendet werden.
@@ -107,7 +107,7 @@ Diese Variablen können aus den Azure Stack-Metadateninformationen abgerufen wer
 | Development Kit | `https://management.local.azurestack.external/` |
 | Integrierte Systeme | `https://management.(region).ext-(machine-name).(FQDN)` |
 
-Weitere Informationen zur Verwendung von Azure SDK für Go in Azure Stack finden Sie unter [Verwenden von API-Versionsprofilen mit Go in Azure Stack](https://docs.microsoft.com/en-us/azure/azure-stack/user/azure-stack-version-profiles-go).
+Weitere Informationen zur Verwendung von Azure SDK für Go in Azure Stack finden Sie unter [Verwenden von API-Versionsprofilen mit Go in Azure Stack](https://docs.microsoft.com/azure/azure-stack/user/azure-stack-version-profiles-go).
 
 
 ## <a name="use-file-based-authentication"></a>Verwenden der dateibasierten Authentifizierung
@@ -127,11 +127,11 @@ import "github.com/Azure/go-autorest/autorest/azure/auth"
 authorizer, err := NewAuthorizerFromFile(azure.PublicCloud.ResourceManagerEndpoint)
 ```
 
-Weitere Informationen zur Verwendung von Dienstprinzipalen sowie zur Verwaltung ihrer Zugriffsberechtigungen finden Sie unter [Erstellen eines Azure-Dienstprinzipals mit Azure CLI 2.0].
+Weitere Informationen zur Verwendung von Dienstprinzipalen sowie zur Verwaltung ihrer Zugriffsberechtigungen finden Sie unter [Erstellen eines Dienstprinzipals über die Azure CLI 2.0].
 
 ## <a name="use-device-token-authentication"></a>Verwenden der Gerätetokenauthentifizierung
 
-Wenn sich Benutzer interaktiv anmelden sollen, empfiehlt sich die Verwendung der Gerätetokenauthentifizierung. Bei diesem Authentifizierungsablauf wird ein Token an den Benutzer übergeben, das dieser auf einer Anmeldewebsite von Microsoft einfügt, auf der er sich mit einem AAD-Konto (Azure Active Directory) anmeldet. Im Gegensatz zur Standardauthentifizierung mit Benutzername/Kennwort unterstützt diese Authentifizierungsmethode Konten mit aktivierter mehrstufiger Authentifizierung.
+Wenn sich Benutzer interaktiv anmelden sollen, empfiehlt sich die Verwendung der Gerätetokenauthentifizierung. Bei diesem Authentifizierungsablauf wird ein Token an den Benutzer übergeben, das dieser auf einer Anmeldewebsite von Microsoft einfügt, auf der er sich bei einem AAD-Konto (Azure Active Directory) authentifiziert. Im Gegensatz zur Standardauthentifizierung mit Benutzername/Kennwort unterstützt diese Authentifizierungsmethode Konten mit aktivierter mehrstufiger Authentifizierung.
 
 Erstellen Sie zur Verwendung der Gerätetokenauthentifizierung mithilfe der Funktion [NewDeviceFlowConfig](https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#NewDeviceFlowConfig) ein Authorizer-Objekt vom Typ [DeviceFlowConfig](https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#DeviceFlowConfig). Rufen Sie [Authorizer](https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#DeviceFlowConfig.Authorizer) für das resultierende Objekt auf, um den Authentifizierungsprozess zu starten. Die Geräteauthentifizierung blockiert die Programmausführung, bis der gesamte Authentifizierungsablauf abgeschlossen ist.
 
