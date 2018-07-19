@@ -4,28 +4,28 @@ description: Tools zur Verwendung mit dem Azure SDK für Go und Azure-Diensten
 author: sptramer
 ms.author: sttramer
 manager: carmonm
-ms.date: 01/30/2018
+ms.date: 07/13/2018
 ms.topic: conceptual
 ms.prod: azure
 ms.technology: azure-sdk-go
 ms.devlang: go
-ms.openlocfilehash: 006d140bffb66fdd769a14511232d4ea5081811d
-ms.sourcegitcommit: 181d4e0b164cf39b3feac346f559596bd19c94db
+ms.openlocfilehash: dfa3912ac13e6f6d52d607f9dcc150f3a5b57602
+ms.sourcegitcommit: d1790b317a8fcb4d672c654dac2a925a976589d4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2018
-ms.locfileid: "38066981"
+ms.lasthandoff: 07/14/2018
+ms.locfileid: "39039504"
 ---
 # <a name="tools-for-developers-using-the-azure-sdk-for-go"></a>Tools für Entwickler, die das Azure SDK für Go nutzen
 
 Hier finden Sie einige Empfehlungen für Tools, mit denen Sie Go-Code effizient schreiben und problemlos in Azure-Diensten nutzen können.
 
-## <a name="azure-cli-20"></a>Azure CLI 2.0
+## <a name="azure-cli"></a>Azure-Befehlszeilenschnittstelle
 
-Die Azure 2.0 CLI stellt eine Befehlszeilenschnittstelle zum Erstellen und Konfigurieren von Azure-Ressourcen in Ihren Abonnements bereit. Die CLI erleichtert Ihnen den schnellen Einstieg in die Erstellung allgemeiner und gemeinsam genutzter Azure-Ressourcen, sodass Sie sich auf die komplexere Nutzung von Diensten konzentrieren können. Die CLI bietet Abfrage- und Filterfunktionen, sodass Sie Ausgaben direkt an Ihre bevorzugten Befehlszeilentools weiterreichen können. Die CLI steht für die Installation auf Ihrem lokalen System, als Docker-Image oder über [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview) zur Verfügung.
+Die Azure CLI stellt eine Befehlszeilenschnittstelle zum Erstellen und Konfigurieren von Azure-Ressourcen in Ihren Abonnements bereit. Die CLI erleichtert Ihnen den schnellen Einstieg in die Erstellung allgemeiner und gemeinsam genutzter Azure-Ressourcen, sodass Sie sich auf die komplexere Nutzung von Diensten konzentrieren können. Die CLI bietet Abfrage- und Filterfunktionen, sodass Sie Ausgaben direkt an Ihre bevorzugten Befehlszeilentools weiterreichen können. Die CLI steht für die Installation auf Ihrem lokalen System, als Docker-Image oder über [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview) zur Verfügung.
 
 > [!div class="nextstepaction"]
-> [Installieren der Azure CLI 2.0](/cli/azure/install-azure-cli)
+> [Installieren der Azure-Befehlszeilenschnittstelle](/cli/azure/install-azure-cli)
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 
@@ -34,6 +34,13 @@ Visual Studio Code ist ein einfacher Editor, der die Go-Sprache über Erweiterun
 * [Installieren von Visual Studio Code](https://code.visualstudio.com/Download)
 * [Abrufen der Visual Studio Code-Erweiterung für Go](https://code.visualstudio.com/docs/languages/go)
 * [Herunterladen der Erweiterung für Azure-Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-azureextensionpack)
+
+## <a name="cicd-with-azure-devops-project"></a>CI/CD mit Azure DevOps-Projekt
+
+Mit der Azure DevOps-Projektpipeline können Sie einen kontinuierlichen Build einrichten und für Ihre Go-Anwendungen bereitstellen. Sie benötigen lediglich ein verfügbares Git-Repository, und Sie können die Bereitstellung und Tests direkt auf Ihren Azure-Ressourcen einrichten. Die Konfigurationspipeline ist einfach zu erstellen und zu verwalten, und da sie direkt in Azure bereitgestellt ist, können Sie sie auf die gleiche Weise wie Ihre anderen Azure-Ressourcen steuern.
+
+> [!div class="nextstepaction"]
+> [Informationen zum Erstellen einer CI/CD-Pipeline mit Azure DevOps-Projekt](/devops-project/azure-devops-project-go)
 
 ## <a name="dependency-management-with-dep"></a>Verwaltung von Abhängigkeiten mit dep
 

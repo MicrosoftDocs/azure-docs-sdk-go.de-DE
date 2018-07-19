@@ -1,21 +1,21 @@
 ---
 title: Bereitstellen eines virtuellen Azure-Computers über Go
-description: Stellen Sie einen virtuellen Computer bereit, indem Sie das Azure SDK für Go verwenden.
+description: Stellen Sie mithilfe des Azure SDK für Go einen virtuellen Computer bereit.
 author: sptramer
 ms.author: sttramer
 manager: carmonm
-ms.date: 04/03/2018
+ms.date: 07/13/2018
 ms.topic: quickstart
 ms.prod: azure
 ms.technology: azure-sdk-go
 ms.service: virtual-machines
 ms.devlang: go
-ms.openlocfilehash: 7592e8617436a76dd27cac5269971051982425bf
-ms.sourcegitcommit: 181d4e0b164cf39b3feac346f559596bd19c94db
+ms.openlocfilehash: 6b1de35748fb7694d45715fa7f028d5730530d2e
+ms.sourcegitcommit: d1790b317a8fcb4d672c654dac2a925a976589d4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2018
-ms.locfileid: "38067015"
+ms.lasthandoff: 07/14/2018
+ms.locfileid: "39039555"
 ---
 # <a name="quickstart-deploy-an-azure-virtual-machine-from-a-template-with-the-azure-sdk-for-go"></a>Schnellstart: Bereitstellen eines virtuellen Azure-Computers über eine Vorlage mit dem Azure SDK für Go
 
@@ -27,9 +27,9 @@ Am Ende dieses Schnellstarts verfügen Sie über eine aktive VM, an der Sie sich
 
 [!INCLUDE [cloud-shell-try-it.md](includes/cloud-shell-try-it.md)]
 
-Wenn Sie in dieser Schnellstartanleitung eine lokale Installation der Azure-Befehlszeilenschnittstelle verwenden möchten, benötigen Sie mindestens die CLI-Version __2.0.28__. Führen Sie `az --version` aus, um sicherzustellen, dass Ihre CLI diese Anforderung erfüllt. Installations- und Upgradeinformationen finden Sie bei Bedarf unter [Installieren von Azure CLI 2.0](/cli/azure/install-azure-cli).
+Wenn Sie in dieser Schnellstartanleitung eine lokale Installation der Azure-Befehlszeilenschnittstelle verwenden möchten, benötigen Sie mindestens die CLI-Version __2.0.28__. Führen Sie `az --version` aus, um sicherzustellen, dass Ihre CLI diese Anforderung erfüllt. Installations- und Upgradeinformationen finden Sie bei Bedarf unter [Installieren von Azure CLI](/cli/azure/install-azure-cli).
 
-## <a name="install-the-azure-sdk-for-go"></a>Installieren des Azure SDK für Go 
+## <a name="install-the-azure-sdk-for-go"></a>Installieren des Azure SDK für Go
 
 [!INCLUDE [azure-sdk-go-get](includes/azure-sdk-go-get.md)]
 
@@ -242,7 +242,9 @@ Die Bereitstellungsdateien werden mit `readJSON` geladen. Auf die Details hierzu
     }
 ```
 
-Der Code basiert auf dem gleichen Muster wie die Erstellung der Ressourcengruppe. Es wird ein neuer Client erstellt, für den die Authentifizierung mit Azure ermöglicht wird, und anschließend wird eine Methode aufgerufen. Die Methode hat sogar den gleichen Namen (`CreateOrUpdate`) wie die entsprechende Methode für Ressourcengruppen. Dieses Muster zieht sich durch das gesamte SDK. Methoden, die ähnliche Aufgaben haben, haben normalerweise auch die gleichen Namen.
+Der Code basiert auf dem gleichen Muster wie die Erstellung der Ressourcengruppe. Es wird ein neuer Client erstellt, für den die Authentifizierung mit Azure ermöglicht wird, und anschließend wird eine Methode aufgerufen.
+Die Methode hat sogar den gleichen Namen (`CreateOrUpdate`) wie die entsprechende Methode für Ressourcengruppen. Dieses Muster zieht sich durch das gesamte SDK.
+Methoden, die ähnliche Aufgaben haben, haben normalerweise auch die gleichen Namen.
 
 Der größte Unterschied ist der Rückgabewert der `deploymentsClient.CreateOrUpdate`-Methode. Hierbei handelt es sich um einen Wert vom Typ [Future](https://godoc.org/github.com/Azure/go-autorest/autorest/azure#Future), der auf dem [Entwurfsmuster mit „Futures“](https://en.wikipedia.org/wiki/Futures_and_promises) basiert. Werte vom Typ „Future“ stellen einen Vorgang mit langer Ausführungsdauer in Azure dar, den Sie bei Abschluss abfragen, abbrechen oder blockieren können.
 
