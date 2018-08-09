@@ -10,12 +10,12 @@ ms.prod: azure
 ms.technology: azure-sdk-go
 ms.service: active-directory
 ms.devlang: go
-ms.openlocfilehash: 278ee81e180287abf3152779821b7dfb76a487e3
-ms.sourcegitcommit: 2a3bd491e087a1d0e7d269bed896c029357d62a6
+ms.openlocfilehash: dfaed972f23daa92fcec686cf34ee636aa624b9a
+ms.sourcegitcommit: 0f581979216f7c9d4913681a6d9f6fe09af26e43
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/12/2018
-ms.locfileid: "38988006"
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "39475873"
 ---
 # <a name="azure-sdk-for-go-samples-for-authentication-and-aad"></a>Azure SDK für Go-Beispiele für Authentifizierung und AAD
 
@@ -25,6 +25,6 @@ Alle Beispiele für das Azure SDK für Go sind auf [GitHub](https://github.com/A
 
 | NAME | BESCHREIBUNG |
 |------|-------------|
-| [iam/oauth](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/iam/oauth.go) | Authentifizieren bei Azure zur Verwendung von Diensten |
-| [authorization/auth](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/authorization/auth.go) | Hinzufügen, Entfernen und Untersuchen von AAD-Rollen |
+| [internal/iam/authorizers](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/internal/iam/authorizers.go) | Authentifizieren bei Azure zur Verwendung von Diensten |
+| [authorization/authorization](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/authorization/authorization.go) | Hinzufügen, Entfernen und Untersuchen von AAD-Rollen |
 | [graphrbac/graph](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/graphrbac/graph.go) | Untersuchen und Erstellen von Dienstprinzipalen und AAD-Anwendungen Hinzufügen von Geheimnissen zu einem vorhandenen Dienstprinzipal oder einer vorhandenen Anwendung |
