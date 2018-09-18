@@ -2,21 +2,21 @@
 author: sptramer
 ms.author: sttramer
 manager: carmonm
-ms.date: 02/14/2018
+ms.date: 09/05/2018
 ms.topic: include
 ms.prod: azure
 ms.technology: azure-cli
-ms.openlocfilehash: d021dd8ef4744b7c50b296b231bf63481f92411a
-ms.sourcegitcommit: 2a3bd491e087a1d0e7d269bed896c029357d62a6
+ms.openlocfilehash: 5df14f939efdd0550b49261c88c8dc6518ada459
+ms.sourcegitcommit: 8b9e10b960150dc08f046ab840d6a5627410db29
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/12/2018
-ms.locfileid: "38988061"
+ms.lasthandoff: 09/07/2018
+ms.locfileid: "44059255"
 ---
-Das [Azure SDK für Go](https://github.com/Azure/azure-sdk-for-go) ist mit Go-Version 1.8 und höheren Versionen kompatibel. Bei Umgebungen mit [Azure Stack-Profilen](https://docs.microsoft.com/azure/azure-stack/azure-stack-version-profiles) ist mindestens Go-Version 1.9 erforderlich.
-Falls Go auf Ihrem System nicht verfügbar ist, befolgen Sie die [Anweisungen für die Installation von Go](https://golang.org/doc/install).
+Das [Azure SDK für Go](https://github.com/Azure/azure-sdk-for-go) ist mit Go-Version 1.8 und höheren Versionen kompatibel. Bei Umgebungen mit [Azure Stack-Profilen](/azure/azure-stack/user/azure-stack-version-profiles-go) ist mindestens Go-Version 1.9 erforderlich.
+Falls Sie Go installieren müssen, befolgen Sie die [Installationsanweisungen für Go](https://golang.org/doc/install).
 
-Sie können das Azure SDK für Go und seine Abhängigkeiten über `go get` abrufen.
+Sie können das Azure SDK für Go und seine Abhängigkeiten über `go get` herunterladen.
 
 ```bash
 go get -u -d github.com/Azure/azure-sdk-for-go/...

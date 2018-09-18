@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.prod: azure
 ms.technology: azure-sdk-go
 ms.devlang: go
-ms.openlocfilehash: 3388359bba791c87025b6ffd0e6b476f95589f73
-ms.sourcegitcommit: 81e97407e6139375bf7357045e818c87a17dcde1
+ms.openlocfilehash: 013a771345d96f0fa8dbece3218a01650744f70b
+ms.sourcegitcommit: 8b9e10b960150dc08f046ab840d6a5627410db29
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36262975"
+ms.lasthandoff: 09/07/2018
+ms.locfileid: "44059185"
 ---
 # <a name="install-the-azure-sdk-for-go"></a>Installieren des Azure SDK für Go
 
@@ -37,9 +37,9 @@ Einige Azure-Dienste verfügen über ein eigenes Go SDK und sind nicht im Kernpa
 
 ## <a name="vendor-the-azure-sdk-for-go"></a>Durchführen des Vendorings für das Azure SDK für Go
 
-Das Vendoring für das Azure SDK für Go kann mit [dep](https://github.com/golang/dep) durchgeführt werden. Das Vendoring wird aus Stabilitätsgründen empfohlen. Fügen Sie `github.com/Azure/azure-sdk-for-go` einem `[[constraint]]`-Abschnitt der Datei `Gopkg.toml` hinzu, um die Unterstützung für `dep` zu verwenden. Fügen Sie beispielsweise den folgenden Eintrag hinzu, um das Vendoring für Version `14.0.0` durchzuführen:
+Das Vendoring für das Azure SDK für Go kann mit [dep](https://github.com/golang/dep) durchgeführt werden. Das Vendoring wird aus Stabilitätsgründen empfohlen. Fügen Sie zur Verwendung von `dep` in Ihrem eigenen Projekt `github.com/Azure/azure-sdk-for-go` zum Abschnitt `[[constraint]]` in `Gopkg.toml` hinzu. Fügen Sie beispielsweise den folgenden Eintrag hinzu, um das Vendoring für Version `14.0.0` durchzuführen:
 
-```
+```toml
 [[constraint]]
 name = "github.com/Azure/azure-sdk-for-go"
 version = "14.0.0"
@@ -62,13 +62,14 @@ Sie erhalten eine vollständige Liste mit den verfügbaren Modulen von GoDoc fü
 [autorest/adal]: https://godoc.org/github.com/Azure/go-autorest/autorest/adal
 [autorest/to]: https://godoc.org/github.com/Azure/go-autorest/autorest/to
 
-Module für Azure-Dienste werden unabhängig von den dazugehörigen SDK-APIs versioniert. Diese Versionen sind Teil des Modulimportpfads und stammen entweder aus einer _Dienstversion_ oder einem _Profil_. Derzeit lautet die Empfehlung, sowohl für die Entwicklung als auch für das Release eine bestimmte Dienstversion zu nutzen. Dienste befinden sich unter dem `services`-Modul. Der vollständige Pfad für den Import ist der Name des Diensts, gefolgt von der Version im Format `YYYY-MM-DD`, worauf erneut der Dienstname folgt. Beispiel für die Einbindung der Version `2017-03-30` des Computediensts:
+Die Versionsangaben von Go-Paketen und Azure-Diensten sind voneinander unabhängig. Die Dienstversionen sind Teil des Modulimportpfads im Modul `services`. Der vollständige Pfad für das Modul ist der Name des Diensts, gefolgt von der Version im Format `YYYY-MM-DD`, worauf erneut der Dienstname folgt. Beispiel für den Import der Version `2017-03-30` des Computediensts:
 
 ```go
 import "github.com/Azure/azure-sdk-for-go/services/compute/mgmt/2017-03-30/compute"
 ```
 
-Derzeit wird empfohlen, die aktuelle Version eines Diensts zu verwenden, sofern nicht ein triftiger Grund für eine andere Vorgehensweise vorliegt.
+Es wird empfohlen, die aktuelle Version eines Diensts zu verwenden, wenn Sie mit der Entwicklung beginnen, und die Versionen konsistent zu halten.
+Dienstanforderungen können sich zwischen Versionen ändern und zu Codefehlern führen, obwohl das Go SDK gar nicht aktualisiert wurde.
 
 Wenn Sie eine gemeinsame Momentaufnahme aller Dienste benötigen, können Sie auch eine einzelne Profilversion wählen. Das einzige gesperrte Profil ist derzeit Version `2017-03-09`, die unter Umständen nicht über die aktuellen Features der Dienste verfügt. Profile befinden sich unter dem Modul `profiles`, und die Version wird im Format `YYYY-MM-DD` angegeben. Dienste werden unter ihrer Profilversion gruppiert. Beispiel für den Import des Verwaltungsmoduls für Azure-Ressourcen aus dem Profil `2017-03-09`:
 

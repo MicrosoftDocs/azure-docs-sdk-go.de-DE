@@ -4,24 +4,26 @@ description: Stellen Sie mithilfe des Azure SDK für Go einen virtuellen Compute
 author: sptramer
 ms.author: sttramer
 manager: carmonm
-ms.date: 07/13/2018
+ms.date: 09/05/2018
 ms.topic: quickstart
-ms.prod: azure
 ms.technology: azure-sdk-go
 ms.service: virtual-machines
 ms.devlang: go
-ms.openlocfilehash: 6b1de35748fb7694d45715fa7f028d5730530d2e
-ms.sourcegitcommit: d1790b317a8fcb4d672c654dac2a925a976589d4
+ms.openlocfilehash: a7970be0857fd414d776241b033af0c23457790c
+ms.sourcegitcommit: 8b9e10b960150dc08f046ab840d6a5627410db29
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39039555"
+ms.lasthandoff: 09/07/2018
+ms.locfileid: "44059134"
 ---
 # <a name="quickstart-deploy-an-azure-virtual-machine-from-a-template-with-the-azure-sdk-for-go"></a>Schnellstart: Bereitstellen eines virtuellen Azure-Computers über eine Vorlage mit dem Azure SDK für Go
 
-In diesem Schnellstart wird die Bereitstellung von Ressourcen über eine Vorlage mit dem Azure SDK für Go beschrieben. Vorlagen sind Momentaufnahmen aller Ressourcen, die in einer [Azure-Ressourcengruppe](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview) enthalten sind. Sie können sich hier während der Durchführung einer nützlichen Aufgabe mit der Funktionalität und den Konventionen des SDK vertraut machen.
+In dieser Schnellstartanleitung wird gezeigt, wie Sie Ressourcen über eine Azure Resource Manager-Vorlage unter Verwendung des Azure SDK für Go bereitstellen. Vorlagen sind Momentaufnahmen aller Ressourcen in einer [Azure-Ressourcengruppe](/azure/azure-resource-manager/resource-group-overview). Sie können sich hier mit der Funktionalität und den Konventionen des SDK vertraut machen.
 
 Am Ende dieses Schnellstarts verfügen Sie über eine aktive VM, an der Sie sich mit einem Benutzernamen und Kennwort anmelden können.
+
+> [!NOTE]
+> Die Erstellung eines virtuellen Computers in Go ohne Resource Manager-Vorlage wird anhand eines [imperativen Beispiels](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/compute/vm.go) veranschaulicht, das erläutert, wie Sie alle VM-Ressourcen mit dem SDK erstellen und konfigurieren. Durch die Verwendung einer Vorlage in diesem Beispiel können wir uns auf SDK-Konventionen konzentrieren, ohne zu ausführlich auf die Azure-Dienstarchitektur eingehen zu müssen.
 
 [!INCLUDE [quickstarts-free-trial-note](includes/quickstarts-free-trial-note.md)]
 
@@ -38,7 +40,7 @@ Wenn Sie in dieser Schnellstartanleitung eine lokale Installation der Azure-Befe
 Wenn Sie sich nicht interaktiv mit einer Anwendung bei Azure anmelden möchten, benötigen Sie einen Dienstprinzipal. Dienstprinzipale sind Teil der rollenbasierten Zugriffssteuerung (RBAC), bei der eine eindeutige Benutzeridentität erstellt wird. Führen Sie den folgenden Befehl aus, um mit der CLI einen neuen Dienstprinzipal zu erstellen:
 
 ```azurecli-interactive
-az ad sp create-for-rbac --name az-go-vm-quickstart --sdk-auth > quickstart.auth
+az ad sp create-for-rbac --sdk-auth > quickstart.auth
 ```
 
 Legen Sie die Umgebungsvariable `AZURE_AUTH_LOCATION` auf den vollständigen Pfad dieser Datei fest. Das SDK liest die Anmeldeinformationen dann direkt aus dieser Datei, ohne dass Sie Änderungen vornehmen oder Informationen aus dem Dienstprinzipal erfassen müssen.
@@ -62,13 +64,7 @@ cd $GOPATH/src/github.com/azure-samples/azure-sdk-for-go-samples/quickstarts/dep
 go run main.go
 ```
 
-Im Falle eines Bereitstellungsfehlers wird eine Meldung mit einem entsprechenden Hinweis angezeigt. Diese enthält jedoch unter Umständen nicht genügend Details. Rufen Sie mithilfe des folgenden Befehls über die Azure-Befehlszeilenschnittstelle die gesamten Details zu dem Bereitstellungsfehler ab:
-
-```azurecli-interactive
-az group deployment show -g GoVMQuickstart -n VMDeployQuickstart
-```
-
-Wenn die Bereitstellung erfolgreich ist, erhalten Sie eine Meldung mit dem Benutzernamen, der IP-Adresse und dem Kennwort für die Anmeldung am neu erstellten virtuellen Computer. Greifen Sie per SSH auf diesen Computer zu, um zu bestätigen, dass er aktiv ist und ausgeführt wird.
+Wenn die Bereitstellung erfolgreich ist, erhalten Sie eine Meldung mit dem Benutzernamen, der IP-Adresse und dem Kennwort für die Anmeldung am neu erstellten virtuellen Computer. Greifen Sie per SSH auf diesen Computer zu, um zu überprüfen, ob er aktiv ist und ausgeführt wird. 
 
 ## <a name="cleaning-up"></a>Bereinigen
 
@@ -77,6 +73,18 @@ Bereinigen Sie die Ressourcen, die für diesen Schnellstart erstellt wurden, ind
 ```azurecli-interactive
 az group delete -n GoVMQuickstart
 ```
+
+Löschen Sie außerdem den erstellten Dienstprinzipal. Die Datei `quickstart.auth` enthält einen JSON-Schlüssel für `clientId`. Kopieren Sie diesen Wert in die Umgebungsvariable `CLIENT_ID_VALUE`, und führen Sie den folgenden Azure CLI-Befehl aus:
+
+```azurecli-interactive
+az ad sp delete --id ${CLIENT_ID_VALUE}
+```
+
+Sie geben den Wert für `CLIENT_ID_VALUE` aus `quickstart.auth` an.
+
+> [!WARNING]
+> Wird der Dienstprinzipal für diese Anwendung nicht gelöscht, bleibt er in Ihrem Azure Active Directory-Mandanten aktiv.
+> Sowohl der Name als auch das Kennwort für den Dienstprinzipal werden als UUIDs generiert. Löschen Sie trotzdem aus Sicherheitsgründen unbedingt alle nicht verwendeten Dienstprinzipale und Azure Active Directory-Anwendungen.
 
 ## <a name="code-in-depth"></a>Ausführliche Informationen zum Code
 
@@ -111,7 +119,7 @@ var (
 
 Es werden Werte deklariert, mit denen die Namen der erstellten Ressourcen angegeben werden. Außerdem wird hier der Standort angegeben. Sie können ihn ändern, um zu ermitteln, wie sich Bereitstellungen in anderen Rechenzentren verhalten. Nicht jedes Rechenzentrum verfügt über alle erforderlichen Ressourcen.
 
-Der Typ `clientInfo` wird deklariert, um alle Informationen zu kapseln, die unabhängig aus der Authentifizierungsdatei geladen werden müssen, um Clients im SDK einzurichten und das Kennwort für den virtuellen Computer festzulegen.
+Der Typ `clientInfo` enthält die Informationen, die aus der Authentifizierungsdatei geladen werden, um Clients im SDK einzurichten und das Kennwort für den virtuellen Computer festzulegen.
 
 Die Konstanten `templateFile` und `parametersFile` verweisen auf die Dateien, die für die Bereitstellung benötigt werden. `authorizer` wird durch das Go SDK für die Authentifizierung konfiguriert. Bei der Variablen `ctx` handelt es sich um einen [Go-Kontext](https://blog.golang.org/context) für die Netzwerkvorgänge.
 
@@ -168,9 +176,9 @@ Im Code werden die folgenden Schritte ausgeführt (in dieser Reihenfolge):
 
 * Erstellen der Ressourcengruppe für die Bereitstellung (`createGroup`)
 * Erstellen der Bereitstellung in dieser Gruppe (`createDeployment`)
-* Abrufen und Anzeigen von Anmeldeinformationen für die bereitgestellte VM (`getLogin`)
+* Abrufen und Anzeigen von Anmeldeinformationen für den bereitgestellte virtuellen Computer (`getLogin`)
 
-### <a name="creating-the-resource-group"></a>Erstellen der Ressourcengruppe
+### <a name="create-the-resource-group"></a>Ressourcengruppe erstellen
 
 Mit der Funktion `createGroup` wird die Ressourcengruppe erstellt. Wenn Sie sich den Ablauf der Aufrufe und die Argumente ansehen, wird deutlich, wie Dienstinteraktionen im SDK strukturiert sind.
 
@@ -197,7 +205,7 @@ Die Funktion [`to.StringPtr`](https://godoc.org/github.com/Azure/go-autorest/aut
 
 Die Methode `groupsClient.CreateOrUpdate` gibt einen Zeiger auf einen Datentyp zurück, der die Ressourcengruppe darstellt. Ein direkter Rückgabewert dieser Art weist auf einen Vorgang mit kurzer Ausführungsdauer hin, der synchron ablaufen soll. Der nächste Abschnitt enthält ein Beispiel für einen Vorgang mit langer Ausführungsdauer sowie Informationen zur Interaktion.
 
-### <a name="performing-the-deployment"></a>Durchführen der Bereitstellung
+### <a name="perform-the-deployment"></a>Ausführen der Bereitstellung
 
 Nach der Erstellung der Ressourcengruppe kann die Bereitstellung durchgeführt werden. Dieser Code ist in kleinere Abschnitte unterteilt, um unterschiedliche Teile der Logik herauszustellen.
 
@@ -254,20 +262,13 @@ Der größte Unterschied ist der Rückgabewert der `deploymentsClient.CreateOrUp
     if err != nil {
         return
     }
-    deployment, err = deploymentFuture.Result(deploymentsClient)
-
-    // Work around possible bugs or late-stage failures
-    if deployment.Name == nil || err != nil {
-        deployment, _ = deploymentsClient.Get(ctx, resourceGroupName, deploymentName)
-    }
-    return
+    return deploymentFuture.Result(deploymentsClient)
+}
 ```
 
 In diesem Beispiel warten Sie am besten, bis der Vorgang abgeschlossen ist. Wenn auf einen Wert vom Typ „Future“ gewartet werden soll, benötigen Sie sowohl ein [context-Objekt](https://blog.golang.org/context) als auch den Client, der den Wert vom Typ `Future` erstellt hat. Hierbei gibt es zwei mögliche Fehlerquellen: Ein auf Clientseite verursachter Fehler, wenn versucht wird, die Methode aufzurufen, und eine Fehlerantwort vom Server. Letztere wird als Teil des Aufrufs `deploymentFuture.Result` zurückgegeben.
 
-Sollten die abgerufenen Bereitstellungsinformationen aufgrund eines Fehlers leer sein, können Sie `deploymentsClient.Get` manuell aufrufen, um sicherzustellen, dass die Daten aufgefüllt werden.
-
-### <a name="obtaining-the-assigned-ip-address"></a>Abrufen der zugewiesenen IP-Adresse
+### <a name="get-the-assigned-ip-address"></a>Abrufen der zugewiesenen IP-Adresse
 
 Sie benötigen die zugewiesene IP-Adresse, um die neu erstellte VM nutzen zu können. IP-Adressen stellen eine eigene separate Azure-Ressource dar, die an NIC-Ressourcen (Network Interface Controller) gebunden ist.
 
@@ -301,7 +302,7 @@ Der Wert für den Benutzer des virtuellen Computers wird ebenfalls aus dem JSON-
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-In diesem Schnellstart haben Sie eine vorhandene Vorlage verwendet und mit Go bereitgestellt. Anschließend haben Sie per SSH eine Verbindung mit der neu erstellten VM hergestellt, um sicherzustellen, dass sie ausgeführt wird.
+In diesem Schnellstart haben Sie eine vorhandene Vorlage verwendet und mit Go bereitgestellt. Anschließend haben Sie per SSH eine Verbindung mit dem neu erstellten virtuellen Computer hergestellt.
 
 Wenn Sie sich weiter über die Arbeit mit virtuellen Computern in der Azure-Umgebung mit Go informieren möchten, helfen Ihnen die Informationen unter [Azure compute samples for Go](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/compute) (Azure-Computebeispiele für Go) und [Azure resource management samples for Go](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/resources) (Azure-Ressourcenverwaltungsbeispiele für Go) weiter.
 

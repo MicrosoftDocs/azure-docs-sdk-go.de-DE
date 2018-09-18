@@ -4,22 +4,21 @@ description: Ausgewählte Beispiele für das Arbeiten mit Azure Active Directory
 author: sptramer
 ms.author: sttramer
 manager: carmonm
-ms.date: 03/21/2018
+ms.date: 09/05/2018
 ms.topic: sample
-ms.prod: azure
 ms.technology: azure-sdk-go
 ms.service: active-directory
 ms.devlang: go
-ms.openlocfilehash: dfaed972f23daa92fcec686cf34ee636aa624b9a
-ms.sourcegitcommit: 0f581979216f7c9d4913681a6d9f6fe09af26e43
+ms.openlocfilehash: ace50d88ac57622b90e4070a6ca8d6fc0a52afac
+ms.sourcegitcommit: 8b9e10b960150dc08f046ab840d6a5627410db29
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "39475873"
+ms.lasthandoff: 09/07/2018
+ms.locfileid: "44059219"
 ---
 # <a name="azure-sdk-for-go-samples-for-authentication-and-aad"></a>Azure SDK für Go-Beispiele für Authentifizierung und AAD
 
-Die folgende Tabelle enthält Links zu ausgewählten Beispielen für Go-Quellcode, die Sie zum Authentifizieren mit dem Azure SDK für Go und zum Arbeiten mit Azure Active Directory (AAD)-Diensten verwenden können.
+Die folgende Tabelle enthält Links zu ausgewählten Beispielen, die die Authentifizierung und Verwendung von Azure Active Directory über das Azure SDK für Go veranschaulichen.
 
 Alle Beispiele für das Azure SDK für Go sind auf [GitHub](https://github.com/Azure-Samples/azure-sdk-for-go-samples) verfügbar.
 
