@@ -11,12 +11,12 @@ ms.technology: azure-sdk-go
 ms.devlang: go
 ms.service: active-directory
 ms.component: authentication
-ms.openlocfilehash: 28fd4a4c0832ab19dcf52dc549d0ddc0d1eec6f1
-ms.sourcegitcommit: 8b9e10b960150dc08f046ab840d6a5627410db29
+ms.openlocfilehash: 8f94b9ba715c32263d324306cce69bd484c05702
+ms.sourcegitcommit: c435f6602524565d340aac5506be5e955e78f16c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2018
-ms.locfileid: "44059100"
+ms.lasthandoff: 09/12/2018
+ms.locfileid: "44711973"
 ---
 # <a name="authentication-methods-in-the-azure-sdk-for-go"></a>Authentifizierungsmethoden im Azure SDK für Go
 
@@ -30,7 +30,7 @@ Das Azure SDK für Go bietet verschiedene Authentifizierungsarten mit unterschie
 |---------------------|---------------------|
 | Zertifikatbasierte Authentifizierung | Sie verfügen über ein X.509-Zertifikat, das für einen AAD-Benutzer oder -Dienstprinzipal (Azure Active Directory) konfiguriert wurde. Weitere Informationen finden Sie unter [Erste Schritte mit zertifikatbasierter Authentifizierung in Azure Active Directory]. |
 | Client credentials (Clientanmeldeinformationen) | Sie verfügen über einen konfigurierten Dienstprinzipal, der für diese Anwendung oder für eine Klasse von Anwendungen konfiguriert ist, der sie angehört. Weitere Informationen finden Sie unter [Erstellen eines Dienstprinzipals über die Azure CLI]. |
-| Verwaltete Dienstidentität (Managed Service Identity, MSI) | Ihre Anwendung wird auf einer Azure-Ressource ausgeführt, die mit MSI (Managed Service Identity) konfiguriert wurde. Weitere Informationen finden Sie unter [Verwaltete Dienstidentität (Managed Service Identity, MSI) für Azure-Ressourcen]. |
+| Verwaltete Identitäten für Azure-Ressourcen | Ihre Anwendung wird auf einer Azure-Ressource ausgeführt, die mit einer verwalteten Identität konfiguriert wurde. Weitere Informationen finden Sie unter [Verwaltete Identitäten für Azure-Ressourcen] (Worum handelt es sich bei verwalteten Identitäten für Azure-Ressourcen?). |
 | Gerätetoken | Ihre Anwendung ist __nur__ für die interaktive Verwendung vorgesehen. Benutzer haben unter Umständen die mehrstufige Authentifizierung aktiviert. Benutzer können sich über einen Webbrowser anmelden. Weitere Informationen finden Sie unter [Verwenden der Gerätetokenauthentifizierung](#use-device-token-authentication).|
 | Benutzername/Kennwort | Sie verfügen über eine interaktive Anwendung, die keine andere Authentifizierungsmethode verwenden kann. Für Ihre Benutzer ist die mehrstufige Authentifizierung für die AAD-Anmeldung nicht aktiviert. |
 
@@ -42,7 +42,7 @@ Das Azure SDK für Go bietet verschiedene Authentifizierungsarten mit unterschie
 
 [Erste Schritte mit zertifikatbasierter Authentifizierung in Azure Active Directory]: /azure/active-directory/active-directory-certificate-based-authentication-get-started
 [Erstellen eines Dienstprinzipals über die Azure CLI]: /cli/azure/create-an-azure-service-principal-azure-cli
-[Verwaltete Dienstidentität (Managed Service Identity, MSI) für Azure-Ressourcen]: /azure/active-directory/managed-service-identity/overview
+[Verwaltete Identitäten für Azure-Ressourcen]: /azure/active-directory/managed-identities-azure-resources/overview
 
 Diese Authentifizierungsarten können mit verschiedenen Methoden verwendet werden.
 
@@ -65,7 +65,7 @@ Die umgebungsbasierte Authentifizierung unterstützt alle Authentifizierungsmeth
 * Client credentials (Clientanmeldeinformationen)
 * X509-Zertifikate
 * Benutzername/Kennwort
-* Verwaltete Dienstidentität (Managed Service Identity, MSI)
+* Verwaltete Identitäten für Azure-Ressourcen
 
 Sind für einen Authentifizierungstyp keine Werte festgelegt oder wird der Authentifizierungstyp verweigert, probiert das SDK automatisch den nächsten Authentifizierungstyp aus. Wenn keine weitere Typen mehr übrig sind, gibt das SDK einen Fehler zurück.
 
@@ -84,7 +84,7 @@ Die folgende Tabelle gibt Aufschluss über die Umgebungsvariablen, die für die 
 | | `AZURE_CLIENT_ID` | Die Anwendungsclient-ID. |
 | | `AZURE_USERNAME` | Der Benutzername für die Anmeldung. |
 | | `AZURE_PASSWORD` | Das Kennwort für die Anmeldung. |
-| __MSI__ | | Für die MSI-Authentifizierung sind keine Anmeldeinformationen erforderlich. Die Anwendung muss auf einer Azure-Ressource ausgeführt werden, die für die Verwendung von MSI konfiguriert ist. Ausführlichere Informationen finden Sie unter [Verwaltete Dienstidentität (Managed Service Identity, MSI) für Azure-Ressourcen]. |
+| __Verwaltete Identität__ | | Für die Authentifizierung der verwalteten Identität sind keine Anmeldeinformationen erforderlich. Die Anwendung muss auf einer Azure-Ressource ausgeführt werden, die für die Verwendung von verwalteten Identitäten konfiguriert ist. Ausführliche Informationen finden Sie unter [Verwaltete Identitäten für Azure-Ressourcen] (Worum handelt es sich bei verwalteten Identitäten für Azure-Ressourcen?). |
 
 Wenn Sie eine Verbindung mit einem Cloud- oder Verwaltungsendpunkt herstellen möchten, bei dem es sich nicht um die standardmäßige öffentliche Azure-Cloud handelt, legen Sie die folgenden Umgebungsvariablen fest. Diese werden häufig bei Verwendung von Azure Stack, bei Verwendung einer Cloud in einer anderen geografischen Region oder bei Verwendung des klassischen Bereitstellungsmodells festgelegt.
 
@@ -168,7 +168,7 @@ Die folgende Tabelle enthält die mit der Schnittstelle `AuthorizerConfig` kompa
 |---------------------|-----------------------|
 | Zertifikatbasierte Authentifizierung | [ClientCertificateConfig] |
 | Client credentials (Clientanmeldeinformationen) | [ClientCredentialsConfig] |
-| Verwaltete Dienstidentität (Managed Service Identity, MSI) | [MSIConfig] |
+| Verwaltete Identitäten für Azure-Ressourcen | [MSIConfig] |
 | Benutzername/Kennwort | [UsernamePasswordConfig] |
 
 [ClientCertificateConfig]: https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#ClientCertificateConfig
