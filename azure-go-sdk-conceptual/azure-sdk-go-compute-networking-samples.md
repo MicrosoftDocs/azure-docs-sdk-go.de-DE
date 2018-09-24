@@ -9,12 +9,12 @@ ms.topic: sample
 ms.technology: azure-sdk-go
 ms.service: virtual-machines
 ms.devlang: go
-ms.openlocfilehash: d570ad8598ae06633d0010245c207641161ee446
-ms.sourcegitcommit: 8b9e10b960150dc08f046ab840d6a5627410db29
+ms.openlocfilehash: 20c264157905ea870b8c432d64a204974a1bc964
+ms.sourcegitcommit: c435f6602524565d340aac5506be5e955e78f16c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2018
-ms.locfileid: "44059083"
+ms.lasthandoff: 09/12/2018
+ms.locfileid: "44711956"
 ---
 # <a name="azure-sdk-for-go-samples-for-compute-and-networking"></a>Azure SDK für Go-Beispiele für Compute und Netzwerk
 
@@ -28,4 +28,4 @@ Alle Beispiele für das Azure SDK für Go sind auf [GitHub](https://github.com/A
 | [compute/vm_disk](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/compute/vm_disk.go) | Erstellen, Anfügen, Trennen, Aktualisieren und Verschlüsseln von Datenträgern für einen virtuellen Computer |
 | [compute/vm](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/compute/vm.go) | Erstellen, Aktualisieren, Deaktivieren und Verwalten von virtuellen Computern |
 | [compute/vm_with_availabilityset](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/compute/vm_with_availabilityset.go) | Erstellen von Verfügbarkeitsgruppen und Lastenausgleichsmodulen für virtuelle Computer |
-| [compute/vm_with_identity](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/compute/vm_with_identity.go) | Erstellen und Verwalten von verwalteten Dienstidentitäten (Managed Service Identities, MSIs) für virtuelle Computer |
+| [compute/vm_with_identity](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/compute/vm_with_identity.go) | Erstellen und Anpassen von verwalteten Identitäten für Azure-Ressourcen | 
