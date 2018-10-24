@@ -10,12 +10,12 @@ ms.topic: conceptual
 ms.technology: azure-sdk-go
 ms.devlang: go
 ms.component: authentication
-ms.openlocfilehash: f5c2c56e43828f0bedad0b5781dc71991ce1fd3e
-ms.sourcegitcommit: 172f81dd6e4c6a275dc8031815aa87cdb488cbf0
+ms.openlocfilehash: c2c3dccfa8da5cfe57fee0b90139002068982560
+ms.sourcegitcommit: 887b15afcdeaf926a5f3d21b64e4045167fd062c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/26/2018
-ms.locfileid: "47231674"
+ms.lasthandoff: 10/21/2018
+ms.locfileid: "49481981"
 ---
 # <a name="authentication-methods-in-the-azure-sdk-for-go"></a>Authentifizierungsmethoden im Azure SDK für Go
 
@@ -70,20 +70,21 @@ Sind für einen Authentifizierungstyp keine Werte festgelegt oder wird der Authe
 
 Die folgende Tabelle gibt Aufschluss über die Umgebungsvariablen, die für die einzelnen Authentifizierungsarten festgelegt werden müssen, die von der umgebungsbasierten Authentifizierung unterstützt werden.
 
-| Authentifizierungsart | Umgebungsvariable | BESCHREIBUNG |
-| ------------------- | -------------------- | ----------- |
-| __Clientanmeldeinformationen__ | `AZURE_TENANT_ID` | Die ID für den Active Directory-Mandanten, zu dem der Dienstprinzipal gehört. |
-| | `AZURE_CLIENT_ID` | Der Name oder die ID des Dienstprinzipals. |
-| | `AZURE_CLIENT_SECRET` | Das dem Dienstprinzipal zugeordnete Geheimnis |
-| __Certificate__ | `AZURE_TENANT_ID` | Die ID für den Active Directory-Mandanten, bei dem das Zertifikat registriert ist. |
-| | `AZURE_CLIENT_ID` | Die dem Zertifikat zugeordnete Anwendungsclient-ID. |
-| | `AZURE_CERTIFICATE_PATH` | Der Pfad der Clientzertifikatdatei. |
-| | `AZURE_CERTIFICATE_PASSWORD` | Das Kennwort für das Clientzertifikat. |
-| __Benutzername/Kennwort__ | `AZURE_TENANT_ID` | Die ID für den Active Directory-Mandanten, zu dem der Benutzer gehört. |
-| | `AZURE_CLIENT_ID` | Die Anwendungsclient-ID. |
-| | `AZURE_USERNAME` | Der Benutzername für die Anmeldung. |
-| | `AZURE_PASSWORD` | Das Kennwort für die Anmeldung. |
-| __Verwaltete Identität__ | | Für die Authentifizierung der verwalteten Identität sind keine Anmeldeinformationen erforderlich. Die Anwendung muss auf einer Azure-Ressource ausgeführt werden, die für die Verwendung von verwalteten Identitäten konfiguriert ist. Ausführliche Informationen finden Sie unter [Verwaltete Identitäten für Azure-Ressourcen] (Worum handelt es sich bei verwalteten Identitäten für Azure-Ressourcen?). |
+
+|  Authentifizierungsart   |     Umgebungsvariable     |                                                                                                     BESCHREIBUNG                                                                                                      |
+|------------------------|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Clientanmeldeinformationen** |      `AZURE_TENANT_ID`       |                                                                    Die ID für den Active Directory-Mandanten, zu dem der Dienstprinzipal gehört.                                                                     |
+|                        |      `AZURE_CLIENT_ID`       |                                                                                       Der Name oder die ID des Dienstprinzipals.                                                                                       |
+|                        |    `AZURE_CLIENT_SECRET`     |                                                                                  Das dem Dienstprinzipal zugeordnete Geheimnis                                                                                   |
+|    **Certificate**     |      `AZURE_TENANT_ID`       |                                                                   Die ID für den Active Directory-Mandanten, bei dem das Zertifikat registriert ist.                                                                    |
+|                        |      `AZURE_CLIENT_ID`       |                                                                              Die dem Zertifikat zugeordnete Anwendungsclient-ID.                                                                              |
+|                        |   `AZURE_CERTIFICATE_PATH`   |                                                                                       Der Pfad der Clientzertifikatdatei.                                                                                       |
+|                        | `AZURE_CERTIFICATE_PASSWORD` |                                                                                       Das Kennwort für das Clientzertifikat.                                                                                       |
+| **Benutzername/Kennwort**  |      `AZURE_TENANT_ID`       |                                                                           Die ID für den Active Directory-Mandanten, zu dem der Benutzer gehört.                                                                           |
+|                        |      `AZURE_CLIENT_ID`       |                                                                                              Die Anwendungsclient-ID.                                                                                              |
+|                        |       `AZURE_USERNAME`       |                                                                                            Der Benutzername für die Anmeldung.                                                                                             |
+|                        |       `AZURE_PASSWORD`       |                                                                                            Das Kennwort für die Anmeldung.                                                                                             |
+|  **Verwaltete Identität**  |                              | Für die Authentifizierung der verwalteten Identität sind keine Anmeldeinformationen erforderlich. Die Anwendung muss auf einer Azure-Ressource ausgeführt werden, die für die Verwendung von verwalteten Identitäten konfiguriert ist. Ausführliche Informationen finden Sie unter [Verwaltete Identitäten für Azure-Ressourcen] (Worum handelt es sich bei verwalteten Identitäten für Azure-Ressourcen?). |
 
 Wenn Sie eine Verbindung mit einem Cloud- oder Verwaltungsendpunkt herstellen möchten, bei dem es sich nicht um die standardmäßige öffentliche Azure-Cloud handelt, legen Sie die folgenden Umgebungsvariablen fest. Diese werden häufig bei Verwendung von Azure Stack, bei Verwendung einer Cloud in einer anderen geografischen Region oder bei Verwendung des klassischen Bereitstellungsmodells festgelegt.
 
