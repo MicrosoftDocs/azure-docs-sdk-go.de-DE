@@ -90,9 +90,9 @@ Probieren Sie einen Schnellstart aus, um mit der Verwendung des Azure SDK für G
 
 Wenn Sie sofort mit anderen Diensten im Go SDK starten möchten, ist es ratsam, sich den verfügbaren Beispielcode anzusehen.
 
-* [Authenticate with Azure services](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/internal/iam) (Authentifizieren mit Azure-Diensten)
-* [Deploy new virtual machines with SSH authentication](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/compute) (Bereitstellen neuer virtueller Computer mit SSH-Authentifizierung)
-* [Deploy a container image to Azure Container Instances](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/containerinstance) (Bereitstellen eines Containerimages für Azure Container Instances)
-* [Create a cluster in Azure Kubernetes Service](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/containerservice) (Erstellen eines Clusters im Azure Kubernetes-Dienst)
-* [Work with Azure Storage services](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/storage) (Arbeiten mit Azure Storage-Diensten)
-* [All samples for the Azure SDK for Go](https://github.com/azure-samples/azure-sdk-for-go-samples) (Alle Beispiele für das Azure SDK für Go)
+* [Authentifizieren mit Azure-Diensten](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/internal/iam)
+* [Bereitstellen neuer virtueller Computer mit SSH-Authentifizierung](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/compute)
+* [Bereitstellen eines Containerimages für Azure Container Instances](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/containerinstance)
+* [Erstellen eines Clusters im Azure Kubernetes-Dienst](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/containerservice)
+* [Arbeiten mit Azure Storage-Diensten](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/storage)
+* [Alle Beispiele für das Azure SDK für Go](https://github.com/azure-samples/azure-sdk-for-go-samples)
